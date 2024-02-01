@@ -1,36 +1,36 @@
 package com.wecp.progressive.entity;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class Accounts implements Comparable<Accounts> {
-
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    private int accountId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer accountId;
     private int customerId;
     private double balance;
+
 
     public Accounts() {
         // constrcutor
     }
 
-    public Accounts(int accountId, int customerId, double balance) {
+
+    public Accounts(Integer accountId, int customerId, double balance) {
         this.accountId = accountId;
         this.customerId = customerId;
         this.balance = balance;
     }
 
     // Getters and setters
-    public int getAccountId() {
+    public Integer getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(int accountId) {
+    public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
