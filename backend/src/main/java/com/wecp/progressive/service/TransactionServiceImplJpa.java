@@ -18,11 +18,14 @@ import java.util.List;
 @Service
 public class TransactionServiceImplJpa implements TransactionService {
 
-    @Autowired
     private TransactionRepository transactionRepository;
+    private AccountRepository accountRepository;
 
     @Autowired
-    private AccountRepository accountRepository;
+    public TransactionServiceImplJpa(TransactionRepository transactionRepository,AccountRepository accountRepository) {
+        this.transactionRepository = transactionRepository;
+        this.accountRepository = accountRepository;
+    }
    
     
 

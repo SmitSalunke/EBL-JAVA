@@ -15,10 +15,13 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImplJpa implements CustomerService {
-    @Autowired
+    
     private CustomerRepository customerRepository;
 
-   
+    @Autowired
+    public CustomerServiceImplJpa(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
     
 
     private static List<Customers> customersList = new ArrayList<>();
@@ -45,9 +48,8 @@ public class CustomerServiceImplJpa implements CustomerService {
     public void updateCustomer(Customers customers) {
         customerRepository.save(customers);
     }
-
     @Override
-    
+    @Transactional
     @Modifying
     public void deleteCustomer(int customerId) {
         customerRepository.deleteByCustomerId(customerId);

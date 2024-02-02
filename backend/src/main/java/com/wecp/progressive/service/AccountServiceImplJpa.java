@@ -15,11 +15,13 @@ import java.util.Optional;
 @Service
 public class AccountServiceImplJpa implements AccountService{
 
-    @Autowired
     private AccountRepository accountRepository;
-    
-   
 
+    @Autowired
+    public AccountServiceImplJpa(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
+    
     @Override
     public List<Accounts> getAllAccounts() throws SQLException {
         return accountRepository.findAll();
