@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.service;
 
 
@@ -15,14 +16,13 @@ import java.util.List;
 
 @Service
 public class CustomerServiceImplJpa implements CustomerService {
-    
-    private CustomerRepository customerRepository;
+
+    private final CustomerRepository customerRepository;
 
     @Autowired
     public CustomerServiceImplJpa(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
-    
 
     private static List<Customers> customersList = new ArrayList<>();
     @Override
@@ -41,13 +41,19 @@ public class CustomerServiceImplJpa implements CustomerService {
         if (customers1 != null) {
             throw new CustomerAlreadyExistsException("Customer already exists");
         }
+        if (customers.getRole().isBlank()) {
+            return -1;
+        }
         return customerRepository.save(customers).getCustomerId();
     }
 
     @Override
     public void updateCustomer(Customers customers) {
-        customerRepository.save(customers);
+        if (!customers.getRole().isBlank()) {
+            customerRepository.save(customers);
+        }
     }
+
     @Override
     @Transactional
     @Modifying
@@ -64,7 +70,7 @@ public class CustomerServiceImplJpa implements CustomerService {
 
 
 
-    
+    // The methods mentioned below have to be used for storing and manipulating data in an ArrayList.
     @Override
     public List<Customers> getAllCustomersFromArrayList() {
         return customersList;
